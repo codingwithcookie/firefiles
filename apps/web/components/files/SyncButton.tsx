@@ -11,7 +11,8 @@ interface Props {}
 
 const SyncButton: React.FC<Props> = ({}) => {
   const { loading } = useBucket();
-  const { syncFilesInCurrentFolder } = useFirebase();
+  const { keys: drive } = useKeys();
+  const { syncFilesInCurrentFolder } = (drive.type == "firebase") ? useFirebase() : useBucket();
 
   // handleSync to be completed
   const handleSync = async () => {
